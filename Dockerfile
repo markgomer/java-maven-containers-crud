@@ -1,3 +1,4 @@
+# do podman build .
 FROM alpine:3.22
 
 # Set environment variables for non-interactive installation

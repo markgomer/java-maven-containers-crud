@@ -7,6 +7,7 @@ public class JDBCPostgres {
 
   // mvn exec:java -Dexec.mainClass="com.yourpackage.MainClassName"
   // mvn exec:java -Dexec.mainClass="JDBCPostgres"
+  // mvn clean compile exec:java -Dexec.mainClass="JDBCPostgres"
   public static void main(String[] args) {
     try {
       /*
