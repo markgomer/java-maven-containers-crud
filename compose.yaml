@@ -1,4 +1,4 @@
-# command it with `podman-compose up -d` then `podman exec -it /bin/sh`
+# command it with `podman-compose up -d` then `podman exec maven -it /bin/sh`
 services:
   pg:
     container_name: postgres
@@ -21,7 +21,13 @@ services:
     volumes:
       - .:/app
     working_dir: /app
-    command: /bin/sh -c "tail -f /dev/null"
+    # command: /bin/sh -c "tail -f /dev/null"
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        trap 'echo "Received SIGTERM, exiting gracefully"; exit 0' SIGTERM
+        tail -f /dev/null & wait $!
     networks:
       - private_network
 
