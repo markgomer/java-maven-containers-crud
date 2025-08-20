@@ -30,4 +30,12 @@ public class FabricaConexao {
     return conexao;
   }
 
+  public static void close() {
+    try {
+      conexao.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
 }
