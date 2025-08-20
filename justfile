@@ -4,6 +4,6 @@ enter-container:
 stop-services:
   podman-compose down
 exec:
-  mvn exec:java -Dexec.mainClass="JDBCPostgres"
+  mvn exec:java -Dexec.mainClass="SistemaCadastro"
 clean-compile:
-  mvn clean compile exec:java -Dexec.mainClass="JDBCPostgres"
+  mvn clean compile exec:java -Dexec.mainClass="SistemaCadastro"
