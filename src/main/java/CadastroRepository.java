@@ -1,4 +1,6 @@
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 public class CadastroRepository {
@@ -8,7 +10,16 @@ public class CadastroRepository {
     this.conexao = FabricaConexao.getConnection();
   }
 
-  public void salvar(Cadastro cadastro) {
+  public void incluir(Cadastro cadastro) {
+    String sql = "INSERT INTO public.tab_cadastro (nome,idade) VALUES(?,?);";
+    try {
+      PreparedStatement ps = conexao.prepareStatement(sql);
+      ps.setString(1, cadastro.getNome());
+      ps.setInt(2, cadastro.getIdade());
+      ps.execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   public void alterar(Cadastro cadastro) {
