@@ -60,7 +60,33 @@ public class CadastroRepository {
   }
 
   public List<Cadastro> listar() {
-    return null;
+    List<Cadastro> lista = new ArrayList<Cadastro>();
+
+    StringBuilder sql = new StringBuilder();
+    sql.append("SELECT id, nome, idade ");
+    sql.append("FROM public.tab_cadastro");
+    try {
+      PreparedStatement ps = conexao.prepareStatement(sql.toString());
+      ResultSet result = ps.executeQuery();
+
+      while (result.next()) {
+        int id = result.getInt("id");
+        String nome = result.getString("nome");
+        int idade = result.getInt("idade");
+
+        Cadastro cadastro = new Cadastro();
+        cadastro.setId(id);
+        cadastro.setNome(nome);
+        cadastro.setIdade(idade);
+
+        lista.add(cadastro);
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    return lista;
   }
 
   public Cadastro buscar() {
