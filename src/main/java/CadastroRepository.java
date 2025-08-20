@@ -8,6 +8,17 @@ public class CadastroRepository {
 
   public CadastroRepository() {
     this.conexao = FabricaConexao.getConnection();
+    this.createTable();
+  }
+
+  public void createTable() {
+    String sql = "CREATE TABLE IF NOT EXISTS tab_cadastro (id SERIAL PRIMARY KEY, nome VARCHAR(50) NOT NULL, idade INT4);";
+    try {
+      PreparedStatement ps = conexao.prepareStatement(sql);
+      ps.execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   public void incluir(Cadastro cadastro) {
