@@ -34,9 +34,29 @@ public class CadastroRepository {
   }
 
   public void alterar(Cadastro cadastro) {
+    String sql = "UPDATE public.tab_cadastro SET nome=?, idade=? WHERE id=?;";
+    try {
+      PreparedStatement ps = conexao.prepareStatement(sql);
+      ps.setString(1, cadastro.getNome());
+      ps.setInt(2, cadastro.getIdade());
+      ps.setInt(3, cadastro.getId());
+      ps.execute();
+      System.out.println("Cadastro alterado com sucesso");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   public void excluir(Integer id) {
+    String sql = "DELETE FROM public.tab_cadastro WHERE id=?;";
+    try {
+      PreparedStatement ps = conexao.prepareStatement(sql);
+      ps.setInt(1, id);
+      ps.execute();
+      System.out.println("Cadastro excluido com sucesso");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   public List<Cadastro> listar() {
