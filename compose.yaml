@@ -1,4 +1,3 @@
-# command it with `podman-compose up -d` then `podman exec maven -it /bin/sh`
 services:
   pg:
     container_name: postgres
@@ -15,13 +14,14 @@ services:
 
   mvn:
     container_name: maven
+    # Build image from the dockerfile
     build: .
     depends_on:
       - pg
     volumes:
       - .:/app
     working_dir: /app
-    # command: /bin/sh -c "tail -f /dev/null"
+    # Enter container terminal. Exit gracefully.
     command: 
       - /bin/sh
       - -c
@@ -31,6 +31,7 @@ services:
     networks:
       - private_network
 
+# Allow both containers to communicate to each other
 networks:
   private_network:
     driver: bridge
